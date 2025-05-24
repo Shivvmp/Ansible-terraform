@@ -1,4 +1,4 @@
-data "aws_ami" "my_ami" {
+data "aws_ami" "DevSecOps-Ansible-Image-2025-05-23T13-15-33Z" {
   most_recent = true
   name_regex  = "^DevSecOps"
   owners      = ["891377037239"]
