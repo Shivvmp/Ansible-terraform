@@ -1,16 +1,16 @@
 data "aws_vpc" "ansible_vpc" {
-  id = "vpc-036e5c5d11bdf83de"
+  id = "vpc-0f697d34684b84ca7"
 }
 
 data "aws_route_table" "ansible_vpc_rt" {
-  subnet_id = "subnet-05597e96c163e70fd"
+  subnet_id = "subnet-03a49a5f62ae1c0c6"
   #If subnet_id giving errors use route table id as below
   #route_table_id = data.aws_route_table.ansible_vpc_rt.id
 }
 
 resource "aws_vpc_peering_connection" "ansible-vpc-peering" {
   peer_vpc_id = data.aws_vpc.ansible_vpc.id
-  vpc_id      = aws_vpc.default.id
+  vpc_id      = aws_vpc.client-vpc.id
   auto_accept = true
   accepter {
     allow_remote_vpc_dns_resolution = true
