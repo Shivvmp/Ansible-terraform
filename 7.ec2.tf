@@ -1,14 +1,7 @@
-data "aws_ami" "DevSecOps-Ansible-Image-2025-05-23T13-15-33Z" {
-  most_recent = true
-  name_regex  = "^DevSecOps"
-  owners      = ["891377037239"]
-}
-
-
+# Use the AMI specified in variables
 resource "aws_instance" "webservers" {
-  #count                       = local.new_environment == "production" ? 3 : 1
-  count                       = 3
-  ami                         = data.aws_ami.my_ami.id
+  count                       = length(var.azs)
+  ami                         = var.amis[var.aws_region]
   instance_type               = lookup(var.instance_type, local.new_environment)
   key_name                    = var.key_name
   subnet_id                   = element(aws_subnet.public-subnets.*.id, count.index)
